@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BirdShooter : MonoBehaviour
 {
-    [SerializeField] private Projectile _projectilPrefab;
+    [SerializeField] private BirdProjectile _projectilePrefab;
     [SerializeField] private float _speed;
     [SerializeField] private PlayerInput _input;
 
@@ -20,7 +20,7 @@ public class BirdShooter : MonoBehaviour
 
     private void Shoot()
     {
-        Projectile projectile = Instantiate(_projectilPrefab, transform.position, transform.rotation);
+        Projectile projectile = Instantiate(_projectilePrefab, transform.position, transform.rotation);
         projectile.Rigidbody.velocity = _speed * transform.right;
     }
 }
