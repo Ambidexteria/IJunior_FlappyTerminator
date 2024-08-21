@@ -46,7 +46,7 @@ public class StageController : MonoBehaviour
 
         while (enabled)
         {
-            _enemySpawner.SpawnAtRandomPosition();
+            _enemySpawner.Spawn();
             yield return _wait;
         }
     }

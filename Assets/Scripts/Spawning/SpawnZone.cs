@@ -4,7 +4,7 @@ using UnityEngine;
 public class SpawnZone : MonoBehaviour
 {
     private Collider2D _collider;
-    private Vector3 _scale;
+    private Vector2 _scale;
 
     private void Awake()
     {

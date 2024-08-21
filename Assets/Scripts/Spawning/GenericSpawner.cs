@@ -35,19 +35,9 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : Spawnabl
         
     }
 
-    public Type Spawn()
-    {
-        AllCountChanged?.Invoke(++_spawnedObjectsCount);
-        return _pool.Get();
-    }
+    public abstract void Spawn();
 
-    public Type SpawnAtRandomPosition()
-    {
-        AllCountChanged?.Invoke(++_spawnedObjectsCount);
-        Type spawnableOject = _pool.Get();
-        spawnableOject.transform.position = GetRandomSpawnPosition();
-        return spawnableOject;
-    }
+    public abstract void Despawn(Type type);
 
     public void ReturnToPool(Type spawnedObject)
     {
@@ -59,6 +49,13 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : Spawnabl
     public Vector3 GetRandomSpawnPosition()
     {
         return _spawnZone.GetRandomSpawnPosition();
+    }
+
+    public Type GetNextObject()
+    {
+        AllCountChanged?.Invoke(++_spawnedObjectsCount);
+        Debug.Log("GenericSpawner - Send");
+        return _pool.Get();
     }
 
     public virtual void PrepareToDeactivate(Type spawnedObject) { }
@@ -90,6 +87,7 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : Spawnabl
         Type spawnedObject = Instantiate(_prefab);
         _spawnedObjects.Add(spawnedObject);
 
+        Debug.Log("GenericSpawner - Created");
         return spawnedObject;
     }
 }
