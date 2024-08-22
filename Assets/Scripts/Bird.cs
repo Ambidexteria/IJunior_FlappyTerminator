@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bird : MonoBehaviour
@@ -9,6 +7,7 @@ public class Bird : MonoBehaviour
     [SerializeField] private BirdMover _birdMover;
 
     public event Action Dead;
+    public event Action Win;
 
     private void OnEnable()
     {
@@ -24,5 +23,8 @@ public class Bird : MonoBehaviour
     {
         if (interactable is EnemyProjectile || interactable is Enemy || interactable is Ground)
             Dead?.Invoke();
+
+        if(interactable is StageFinish)
+            Win?.Invoke();
     }
 }

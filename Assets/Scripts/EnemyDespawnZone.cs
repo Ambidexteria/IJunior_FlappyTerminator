@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
@@ -11,10 +9,5 @@ public class EnemyDespawnZone : MonoBehaviour, IInteractable
     {
         _collider = GetComponent<Collider2D>();
         _collider.isTrigger = true;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("Triggered");
     }
 }

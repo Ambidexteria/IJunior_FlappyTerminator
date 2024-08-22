@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyCollisionHandler : MonoBehaviour
@@ -11,7 +10,6 @@ public class EnemyCollisionHandler : MonoBehaviour
         if (collision.TryGetComponent(out IInteractable interactable))
         {
             CollisionDetected?.Invoke(interactable);
-            Debug.Log("Enemy collided");
         }
     }
 }

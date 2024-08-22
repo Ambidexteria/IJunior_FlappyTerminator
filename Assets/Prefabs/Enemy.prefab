@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collisionHandler: {fileID: 8181584718664315039}
+  _speed: 1
 --- !u!114 &-4493167041270298436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _projectilePrefab: {fileID: 458037311174743671, guid: 5062ba45a34043c4c9dce2b545072791, type: 3}
   _speed: 5
-  _cooldown: 5
+  _cooldown: 4
 --- !u!58 &6582258098746242639
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -25,16 +25,6 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : Spawnabl
         InitializePool();
     }
 
-    private void OnEnable()
-    {
-        
-    }
-
-    private void OnDisable()
-    {
-        
-    }
-
     public abstract void Spawn();
 
     public abstract void Despawn(Type type);
@@ -54,7 +44,6 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : Spawnabl
     public Type GetNextObject()
     {
         AllCountChanged?.Invoke(++_spawnedObjectsCount);
-        Debug.Log("GenericSpawner - Send");
         return _pool.Get();
     }
 
@@ -86,8 +75,6 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : Spawnabl
     {
         Type spawnedObject = Instantiate(_prefab);
         _spawnedObjects.Add(spawnedObject);
-
-        Debug.Log("GenericSpawner - Created");
         return spawnedObject;
     }
 }

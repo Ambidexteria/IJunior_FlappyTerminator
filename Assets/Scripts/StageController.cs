@@ -1,27 +1,29 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class StageController : MonoBehaviour
 {
+    [SerializeField] private StageProgressBar _stageProgressBar;
     [SerializeField] private Bird _bird;
     [SerializeField] private EnemySpawner _enemySpawner;
     [SerializeField] private float _spawnDelay = 3f;
     [SerializeField] private float _spawnCooldown = 2f;
-    [SerializeField] private TextMeshProUGUI _gameOverText;
+    [SerializeField] private TextMeshProUGUI _endStageMessage;
 
     private WaitForSeconds _wait;
 
     private void OnEnable()
     {
-        _bird.Dead += GameOver;
+        _bird.Dead += ShowGameOverMessage;
+        _bird.Win += ShowWinMessage;
     }
 
     private void OnDisable()
     {
-        _bird.Dead -= GameOver;
+        _bird.Dead -= ShowGameOverMessage;
+        _bird.Win -= ShowWinMessage;
     }
 
     private void Awake()
@@ -38,6 +40,11 @@ public class StageController : MonoBehaviour
         StartCoroutine(LaunchSpawnCoroutine());
     }
 
+    private void Update()
+    {
+        _stageProgressBar.UpdateProgress(_bird.transform.position);
+    }
+
     private IEnumerator LaunchSpawnCoroutine()
     {
         yield return new WaitForSeconds(_spawnDelay);
@@ -51,9 +58,17 @@ public class StageController : MonoBehaviour
         }
     }
 
-    private void GameOver()
+    private void ShowGameOverMessage()
     {
         Time.timeScale = 0f;
-        _gameOverText.gameObject.SetActive(true);
+        _endStageMessage.text = "Game Over";
+        _endStageMessage.gameObject.SetActive(true);
+    }
+
+    private void ShowWinMessage()
+    {
+        Time.timeScale = 0f;
+        _endStageMessage.text = "You win!";
+        _endStageMessage.gameObject.SetActive(true);
     }
 }

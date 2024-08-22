@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,7 +29,6 @@ public class EnemySpawner : GenericSpawner<Enemy>
 
     public override void Spawn()
     {
-        Debug.Log("EnemySpawner - Spawned");
         Enemy enemy = GetNextObject();
         enemy.transform.position = GetRandomSpawnPosition();
         _enemiesInScene.Add(enemy);
@@ -39,7 +37,6 @@ public class EnemySpawner : GenericSpawner<Enemy>
 
     public override void Despawn(Enemy enemy)
     {
-        Debug.Log("EnemySpawner - Despawned");
         _enemiesInScene.Remove(enemy);
         ReturnToPool(enemy);
     }
