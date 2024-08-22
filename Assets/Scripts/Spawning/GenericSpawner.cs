@@ -11,7 +11,7 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : Spawnabl
     [SerializeField] private int _poolMaxSize = 100;
     [SerializeField] private List<Type> _spawnedObjects;
 
-    private ObjectPool<Type> _pool;
+    private CustomPool<Type> _pool;
     private int _spawnedObjectsCount;
 
     public event Action<int> ActiveCountChanged;
@@ -32,7 +32,7 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : Spawnabl
     public void ReturnToPool(Type spawnedObject)
     {
         PrepareToDeactivate(spawnedObject);
-        _pool.Release(spawnedObject);
+        _pool.Return(spawnedObject);
         ActiveCountChanged?.Invoke(_pool.CountActive);
     }
 
@@ -60,7 +60,7 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : Spawnabl
 
     private void InitializePool()
     {
-        _pool = new ObjectPool<Type>(
+        _pool = new CustomPool<Type>(
             createFunc: () => Create(),
             actionOnGet: (spawnedObject) => PrepareForSpawn(spawnedObject),
             actionOnRelease: (spawnedObject) => spawnedObject.gameObject.SetActive(false),
