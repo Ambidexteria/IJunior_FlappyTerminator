@@ -28,7 +28,7 @@ public class StageController : MonoBehaviour
 
     private void Awake()
     {
-        if (_enemySpawner == null)
+        if (_enemySpawner == null || _stageProgressBar == null || _bird == null || _endStageMessage == null)
             throw new NullReferenceException();
 
         if (_spawnDelay <= 0 || _spawnCooldown <= 0)

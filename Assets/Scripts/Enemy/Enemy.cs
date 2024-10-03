@@ -9,6 +9,12 @@ public class Enemy : SpawnableObject, IInteractable
     public event Action<Enemy> Destroyed;
     public event Action<Enemy> Despawning;
 
+    private void Awake()
+    {
+        if (_collisionHandler == null)
+            throw new Exception();
+    }
+
     private void OnEnable()
     {
         _collisionHandler.CollisionDetected += ProcessCollision;
@@ -28,8 +34,6 @@ public class Enemy : SpawnableObject, IInteractable
 
     private void ProcessCollision(IInteractable interactable)
     {
-        Debug.Log("Processing collision");
-
         if (interactable is EnemyDespawnZone)
         {
             Despawning?.Invoke(this);

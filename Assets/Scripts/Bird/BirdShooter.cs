@@ -1,4 +1,6 @@
- using UnityEngine;
+using Unity.VisualScripting;
+using UnityEngine;
+using System;
 
 public class BirdShooter : MonoBehaviour
 {
@@ -6,6 +8,12 @@ public class BirdShooter : MonoBehaviour
     [SerializeField] private Transform _shootStartPoint;
     [SerializeField] private float _speed;
     [SerializeField] private PlayerInput _input;
+
+    private void Awake()
+    {
+        if (_projectilePrefab == null || _shootStartPoint == null || _input == null)
+            throw new Exception()
+;    }
 
     private void OnEnable()
     {

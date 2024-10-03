@@ -9,6 +9,12 @@ public class Bird : MonoBehaviour
     public event Action Dead;
     public event Action Win;
 
+    private void Awake()
+    {
+        if (_birdCollisionHandler == null || _birdMover == null)
+            throw new Exception();
+    }
+
     private void OnEnable()
     {
         _birdCollisionHandler.CollisionDetected += ProcessCollision;

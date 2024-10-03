@@ -7,21 +7,15 @@ public class CustomPool<Type> where Type : MonoBehaviour
     private Queue<Type> _pooledObjects;
 
     private readonly Func<Type> _createFunc;
-
     private readonly Action<Type> _actionOnGet;
-
     private readonly Action<Type> _actionOnRelease;
-
     private readonly Action<Type> _actionOnDestroy;
-
     private readonly int _maxSize;
 
     internal bool _collectionCheck;
 
     public int CountAll { get; private set; }
-
     public int CountActive => CountAll - CountInactive;
-
     public int CountInactive => _pooledObjects.Count;
 
     public CustomPool(Func<Type> createFunc, Action<Type> actionOnGet = null, Action<Type> actionOnRelease = null, Action<Type> actionOnDestroy = null, bool collectionCheck = true, int defaultCapacity = 10, int maxSize = 10000)

@@ -13,11 +13,11 @@ public class BackgroundScroller : MonoBehaviour
 
     private void Awake()
     {
+        if (_detectorOutOfView == null || _detectorCurrent == null || _sprites == null)
+            throw new NullReferenceException();
+
         if (_sprites.Length == 0)
             throw new Exception();
-
-        if(_detectorOutOfView == null)
-            throw new NullReferenceException();
 
         _currentActive = _sprites[0];
     }

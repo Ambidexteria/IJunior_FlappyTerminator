@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,6 +9,12 @@ public class EnemyShooter : MonoBehaviour
     [SerializeField] private float _cooldown = 5f;
 
     private WaitForSeconds _wait;
+
+    private void Awake()
+    {
+        if (_projectilePrefab == null)
+            throw new Exception();
+    }
 
     private void Start()
     {

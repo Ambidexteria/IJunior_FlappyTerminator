@@ -43,7 +43,7 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : Spawnabl
 
     public Type GetNextObject()
     {
-        AllCountChanged?.Invoke(++_spawnedObjectsCount);
+         AllCountChanged?.Invoke(++_spawnedObjectsCount);
         return _pool.Get();
     }
 

@@ -6,7 +6,7 @@ public class BirdTracker : MonoBehaviour
     [SerializeField] private Bird _bird;
     [SerializeField] private float _offset = 5f;
 
-    private void Start()
+    private void Awake()
     {
         if (_bird == null)
             throw new NullReferenceException();

@@ -13,7 +13,6 @@ public class BackgroundDetector : MonoBehaviour
         if(collision.TryGetComponent(out BackgroundSprite sprite))
         {
             Triggered?.Invoke(sprite);
-            Debug.Log("DetectorTriggered");
         }
     }
 }

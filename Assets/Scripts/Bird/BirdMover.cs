@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class BirdMover : MonoBehaviour
@@ -12,6 +13,12 @@ public class BirdMover : MonoBehaviour
 
     private Rigidbody2D _rigidbody;
     private Quaternion _targetRotation;
+
+    private void Awake()
+    {
+        if (_input == null)
+            throw new Exception();
+    }
 
     private void Start()
     {
