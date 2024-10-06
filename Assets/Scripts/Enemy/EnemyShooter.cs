@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemyShooter : MonoBehaviour
 {
-    [SerializeField] private EnemyProjectile _projectilePrefab;
+    [SerializeField] private EnemyProjectileSpawner _projectileSpawner;
+    [SerializeField] private Projectile _projectilePrefab;
     [SerializeField] private float _speed = 5f;
     [SerializeField] private float _cooldown = 5f;
 
@@ -13,7 +14,9 @@ public class EnemyShooter : MonoBehaviour
     private void Awake()
     {
         if (_projectilePrefab == null)
-            throw new Exception();
+            throw new NullReferenceException();
+
+        _wait = new WaitForSeconds(_cooldown);
     }
 
     private void Start()
@@ -21,10 +24,13 @@ public class EnemyShooter : MonoBehaviour
         StartCoroutine(LaunchShootCoroutine());
     }
 
+    public void SetProjectileSpawner(EnemyProjectileSpawner spawner)
+    {
+        _projectileSpawner = spawner;
+    }
+
     private IEnumerator LaunchShootCoroutine()
     {
-        _wait = new WaitForSeconds(_cooldown);
-
         while(enabled)
         {
             yield return _wait;
@@ -34,7 +40,8 @@ public class EnemyShooter : MonoBehaviour
 
     private void Shoot()
     {
-        Projectile projectile = Instantiate(_projectilePrefab, transform.position, transform.rotation);
+        Projectile projectile = _projectileSpawner.GetNextObject();
+        projectile.transform.position = transform.position;
         projectile.Rigidbody.velocity = _speed * Vector2.left;
     }
 }

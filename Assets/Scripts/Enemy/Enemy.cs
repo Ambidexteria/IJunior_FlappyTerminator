@@ -3,16 +3,22 @@ using UnityEngine;
 
 public class Enemy : SpawnableObject, IInteractable
 {
+    [SerializeField] private EnemyShooter _shooter;
     [SerializeField] private EnemyCollisionHandler _collisionHandler;
     [SerializeField] private float _speed = 3f;
 
     public event Action<Enemy> Destroyed;
     public event Action<Enemy> Despawning;
 
+    public EnemyShooter Shooter => _shooter;
+
     private void Awake()
     {
+        if (_shooter == null)
+            throw new NullReferenceException();
+
         if (_collisionHandler == null)
-            throw new Exception();
+            throw new NullReferenceException();
     }
 
     private void OnEnable()
@@ -39,10 +45,15 @@ public class Enemy : SpawnableObject, IInteractable
             Despawning?.Invoke(this);
         }
 
-        if (interactable is BirdProjectile)
+        if (interactable is Projectile)
         {
-            Despawning?.Invoke(this);
-            Destroyed?.Invoke(this);
+            Projectile projectile = interactable as Projectile;
+
+            if (projectile.Type == ProjectileType.Bird)
+            {
+                Despawning?.Invoke(this);
+                Destroyed?.Invoke(this);
+            }
         }
     }
 }

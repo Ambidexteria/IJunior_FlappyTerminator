@@ -1,16 +1,20 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BirdProjectileSpawner : GenericSpawner<Projectile>
+public class EnemyProjectileSpawner : GenericSpawner<Projectile>
 {
     [SerializeField] private ProjectileType _projectileType;
     [SerializeField] private List<Projectile> _projectiles = new List<Projectile>();
 
+    private void Start()
+    {
+        Debug.Log("EnemyProjectileSPawner Start");
+    }
 
     private void OnEnable()
     {
-        if(_projectiles.Count > 0)
+        if (_projectiles.Count > 0)
         {
             foreach (var projectile in _projectiles)
             {

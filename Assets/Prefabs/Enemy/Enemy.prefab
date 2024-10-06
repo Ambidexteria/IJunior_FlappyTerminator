@@ -104,6 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae201b8830f4e8041aeabab824cab6c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shooter: {fileID: -4493167041270298436}
   _collisionHandler: {fileID: 8181584718664315039}
   _speed: 1
 --- !u!114 &-4493167041270298436
@@ -118,7 +119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cc2cae62a97a0949b734bbde467d9ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectilePrefab: {fileID: 458037311174743671, guid: 5062ba45a34043c4c9dce2b545072791, type: 3}
+  _spawner: {fileID: 7155783034120510707, guid: 462309cffeb68f045a9a6b7cd8ef01a6, type: 3}
+  _projectilePrefab: {fileID: -7361438259518438234, guid: 5062ba45a34043c4c9dce2b545072791, type: 3}
   _speed: 5
   _cooldown: 4
 --- !u!70 &594954563528504731

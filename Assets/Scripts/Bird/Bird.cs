@@ -27,7 +27,17 @@ public class Bird : MonoBehaviour
 
     private void ProcessCollision(IInteractable interactable)
     {
-        if (interactable is EnemyProjectile || interactable is Enemy || interactable is Ground)
+        if (interactable is Projectile) 
+        {
+            Projectile projectile = (Projectile) interactable;
+
+            if (projectile.Type == ProjectileType.Enemy)
+            {
+                Dead?.Invoke();
+            }
+        }
+
+        if (interactable is Enemy || interactable is Ground)
             Dead?.Invoke();
 
         if(interactable is StageFinish)

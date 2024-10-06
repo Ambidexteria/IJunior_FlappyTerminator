@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class GenericSpawner<Type> : MonoBehaviour where Type : SpawnableObject
@@ -7,7 +6,6 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : Spawnabl
     [SerializeField] private Type _prefab;
     [SerializeField] private int _poolDefaultCapacity = 20;
     [SerializeField] private int _poolMaxSize = 100;
-    [SerializeField] private List<Type> _spawnedObjects;
 
     private CustomPool<Type> _pool;
     private int _spawnedObjectsCount;
@@ -33,7 +31,7 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : Spawnabl
 
     public Type GetNextObject()
     {
-         AllCountChanged?.Invoke(++_spawnedObjectsCount);
+        AllCountChanged?.Invoke(++_spawnedObjectsCount);
         return _pool.Get();
     }
 
@@ -63,8 +61,11 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : Spawnabl
 
     private Type Create()
     {
+        if (_prefab == null)
+            throw new NullReferenceException();
+
         Type spawnedObject = Instantiate(_prefab);
-        _spawnedObjects.Add(spawnedObject);
+
         return spawnedObject;
     }
 }

@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class EnemySpawner : GenericSpawner<Enemy>
 {
+    [SerializeField] private EnemyProjectileSpawner _projectileSpawner;
     [SerializeField] private SpawnZone _spawnZone;
     [SerializeField] private List<Enemy> _enemiesInScene = new();
 
     private void Start()
     {
+        if (_projectileSpawner == null)
+            throw new NullReferenceException();
+
         if (_spawnZone == null)
             throw new NullReferenceException();
     }
@@ -44,8 +48,10 @@ public class EnemySpawner : GenericSpawner<Enemy>
     {
         Enemy enemy = GetNextObject();
         enemy.transform.position = GetRandomSpawnPosition();
-        _enemiesInScene.Add(enemy);
         enemy.Despawning += Despawn;
+        enemy.Shooter.SetProjectileSpawner(_projectileSpawner);
+
+        _enemiesInScene.Add(enemy);
 
         return enemy;
     }
