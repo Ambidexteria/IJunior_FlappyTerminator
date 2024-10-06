@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class EnemySpawner : GenericSpawner<Enemy>
 {
+    [SerializeField] private SpawnZone _spawnZone;
     [SerializeField] private List<Enemy> _enemiesInScene = new();
+
+    private void Start()
+    {
+        if (_spawnZone == null)
+            throw new NullReferenceException();
+    }
 
     private void OnEnable()
     {
@@ -28,12 +35,19 @@ public class EnemySpawner : GenericSpawner<Enemy>
         }
     }
 
-    public override void Spawn()
+    public Vector3 GetRandomSpawnPosition()
+    {
+        return _spawnZone.GetRandomSpawnPosition();
+    }
+
+    public override Enemy Spawn()
     {
         Enemy enemy = GetNextObject();
         enemy.transform.position = GetRandomSpawnPosition();
         _enemiesInScene.Add(enemy);
         enemy.Despawning += Despawn;
+
+        return enemy;
     }
 
     public override void Despawn(Enemy enemy)

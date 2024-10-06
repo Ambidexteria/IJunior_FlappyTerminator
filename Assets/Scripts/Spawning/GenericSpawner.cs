@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Pool;
 
 public abstract class GenericSpawner<Type> : MonoBehaviour where Type : SpawnableObject
 {
     [SerializeField] private Type _prefab;
-    [SerializeField] private SpawnZone _spawnZone;
     [SerializeField] private int _poolDefaultCapacity = 20;
     [SerializeField] private int _poolMaxSize = 100;
     [SerializeField] private List<Type> _spawnedObjects;
@@ -19,13 +17,10 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : Spawnabl
 
     private void Awake()
     {
-        if (_prefab == null || _spawnZone == null)
-            throw new ArgumentNullException();
-
         InitializePool();
     }
 
-    public abstract void Spawn();
+    public abstract Type Spawn();
 
     public abstract void Despawn(Type type);
 
@@ -34,11 +29,6 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : Spawnabl
         PrepareToDeactivate(spawnedObject);
         _pool.Return(spawnedObject);
         ActiveCountChanged?.Invoke(_pool.CountActive);
-    }
-
-    public Vector3 GetRandomSpawnPosition()
-    {
-        return _spawnZone.GetRandomSpawnPosition();
     }
 
     public Type GetNextObject()

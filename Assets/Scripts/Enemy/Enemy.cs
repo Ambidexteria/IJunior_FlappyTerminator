@@ -34,7 +34,7 @@ public class Enemy : SpawnableObject, IInteractable
 
     private void ProcessCollision(IInteractable interactable)
     {
-        if (interactable is EnemyDespawnZone)
+        if (interactable is DespawnZone)
         {
             Despawning?.Invoke(this);
         }

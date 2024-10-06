@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
-public class Projectile : MonoBehaviour, IInteractable
+public class Projectile : SpawnableObject, IInteractable
 {
     [SerializeField] private float _lifeTime = 10f;
 
@@ -29,5 +30,10 @@ public class Projectile : MonoBehaviour, IInteractable
     {
         if (Time.time > _timeToDie)
             Destroy(gameObject);
+    }
+
+    public override void PrepareForSpawn()
+    {
+
     }
 }

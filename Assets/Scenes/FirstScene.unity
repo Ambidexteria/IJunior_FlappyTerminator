@@ -188,10 +188,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 190545045999333525, guid: 805d540ef3b1f9e40abd0259931e9b74, type: 3}
-  _spawnZone: {fileID: 1403603237}
   _poolDefaultCapacity: 5
   _poolMaxSize: 10
   _spawnedObjects: []
+  _spawnZone: {fileID: 1403603237}
   _enemiesInScene: []
 --- !u!4 &103072475
 Transform:
@@ -945,6 +945,54 @@ Transform:
   - {fileID: 317120453}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &968005189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 968005191}
+  - component: {fileID: 968005190}
+  m_Layer: 0
+  m_Name: BirdProjectileSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &968005190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968005189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54329991b4fc75a42bf699adc079e3ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 8767163275965611310, guid: 3e52fb1d2daada347b0df4a2c486c5e5, type: 3}
+  _poolDefaultCapacity: 10
+  _poolMaxSize: 30
+  _spawnedObjects: []
+--- !u!4 &968005191
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968005189}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 50.51365, y: -2.9549284, z: -0.048264403}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1084762010
 GameObject:
   m_ObjectHideFlags: 0
@@ -1552,7 +1600,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1565056024}
   - component: {fileID: 1565056026}
-  - component: {fileID: 1565056025}
+  - component: {fileID: 1565056027}
   m_Layer: 0
   m_Name: DespawnZone
   m_TagString: Untagged
@@ -1575,18 +1623,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1105110266}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1565056025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1565056023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7877c1c35df6cf4e83132013aa15f3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &1565056026
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1632,6 +1668,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1565056027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565056023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c3bdda6f9eb5bb41aa9f0212267d298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1696453942
 GameObject:
   m_ObjectHideFlags: 0
@@ -2043,6 +2091,10 @@ PrefabInstance:
       propertyPath: _input
       value: 
       objectReference: {fileID: 519420033}
+    - target: {fileID: 4393482100551248193, guid: 8aec0d165b50af9458f37ed6ce33cb17, type: 3}
+      propertyPath: _projectileSpawner
+      value: 
+      objectReference: {fileID: 968005190}
     - target: {fileID: 5037365070299706400, guid: 8aec0d165b50af9458f37ed6ce33cb17, type: 3}
       propertyPath: m_SortingLayer
       value: 3
@@ -2076,3 +2128,4 @@ SceneRoots:
   - {fileID: 1493401039}
   - {fileID: 4302545022604736352}
   - {fileID: 782321907}
+  - {fileID: 968005191}

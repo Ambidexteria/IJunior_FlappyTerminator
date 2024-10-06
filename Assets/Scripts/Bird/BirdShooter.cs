@@ -4,14 +4,14 @@ using System;
 
 public class BirdShooter : MonoBehaviour
 {
-    [SerializeField] private BirdProjectile _projectilePrefab;
+    [SerializeField] private BirdProjectileSpawner _projectileSpawner;
     [SerializeField] private Transform _shootStartPoint;
     [SerializeField] private float _speed;
     [SerializeField] private PlayerInput _input;
 
     private void Awake()
     {
-        if (_projectilePrefab == null || _shootStartPoint == null || _input == null)
+        if (_projectileSpawner == null || _shootStartPoint == null || _input == null)
             throw new Exception()
 ;    }
 
@@ -27,7 +27,8 @@ public class BirdShooter : MonoBehaviour
 
     private void Shoot()
     {
-        Projectile projectile = Instantiate(_projectilePrefab, _shootStartPoint.position, _shootStartPoint.rotation);
+        Projectile projectile = _projectileSpawner.Spawn();
+        projectile.transform.position = _shootStartPoint.position;
         projectile.Rigidbody.velocity = _speed * transform.right;
     }
 }
