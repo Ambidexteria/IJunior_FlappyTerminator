@@ -11,18 +11,25 @@ public class BirdShooter : MonoBehaviour
 
     private void Awake()
     {
-        if (_projectileSpawner == null || _shootStartPoint == null || _input == null)
-            throw new Exception()
-;    }
+        if (_projectileSpawner == null)
+            throw new NullReferenceException();
+
+        if (_shootStartPoint == null)
+            throw new NullReferenceException();
+
+        if (_input == null)
+            throw new NullReferenceException();
+        ;
+    }
 
     private void OnEnable()
     {
-        _input.EKeyPressed += Shoot;
+        _input.Shoot += Shoot;
     }
 
     private void OnDisable()
     {
-        _input.EKeyPressed -= Shoot;
+        _input.Shoot -= Shoot;
     }
 
     private void Shoot()

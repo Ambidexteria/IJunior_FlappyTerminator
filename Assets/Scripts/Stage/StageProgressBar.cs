@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,8 +12,14 @@ public class StageProgressBar : MonoBehaviour
 
     private void Awake()
     {
-        if (_slider == null || _stageFinish == null || _stageStart == null)
-            throw new System.NullReferenceException();
+        if (_slider == null)
+            throw new NullReferenceException();
+
+        if (_stageFinish == null)
+            throw new NullReferenceException();
+
+        if (_stageFinish == null)
+            throw new NullReferenceException();
 
         CalculateStageDistance();
     }

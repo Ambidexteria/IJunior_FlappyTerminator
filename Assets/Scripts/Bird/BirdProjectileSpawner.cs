@@ -33,9 +33,8 @@ public class BirdProjectileSpawner : GenericSpawner<Projectile>
     public override void Despawn(Projectile projectile)
     {
         _projectiles.Remove(projectile);
+        projectile.Destroyed -= Despawn;
         ReturnToPool(projectile);
-        Debug.Log("Projectile despawned");
-
     }
 
     public override Projectile Spawn()

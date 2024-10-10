@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public abstract class GenericSpawner<Type> : MonoBehaviour where Type : SpawnableObject
 {
@@ -7,11 +8,7 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : Spawnabl
     [SerializeField] private int _poolDefaultCapacity = 20;
     [SerializeField] private int _poolMaxSize = 100;
 
-    private CustomPool<Type> _pool;
-    private int _spawnedObjectsCount;
-
-    public event Action<int> ActiveCountChanged;
-    public event Action<int> AllCountChanged;
+    private ObjectPool<Type> _pool;
 
     private void Awake()
     {
@@ -25,35 +22,33 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : Spawnabl
     public void ReturnToPool(Type spawnedObject)
     {
         PrepareToDeactivate(spawnedObject);
-        _pool.Return(spawnedObject);
-        ActiveCountChanged?.Invoke(_pool.CountActive);
+        _pool.Release(spawnedObject);
     }
 
     public Type GetNextObject()
     {
-        AllCountChanged?.Invoke(++_spawnedObjectsCount);
-        return _pool.Get();
+            Type type = _pool.Get();
+            type.gameObject.SetActive(true);
+
+            return type;
     }
 
     public virtual void PrepareToDeactivate(Type spawnedObject) { }
 
     private Type PrepareForSpawn(Type spawnedObject)
     {
-        spawnedObject.PrepareForSpawn();
         spawnedObject.gameObject.SetActive(true);
-        ActiveCountChanged?.Invoke(_pool.CountActive);
 
         return spawnedObject;
     }
 
     private void InitializePool()
     {
-        _pool = new CustomPool<Type>(
+        _pool = new ObjectPool<Type>(
             createFunc: () => Create(),
             actionOnGet: (spawnedObject) => PrepareForSpawn(spawnedObject),
             actionOnRelease: (spawnedObject) => spawnedObject.gameObject.SetActive(false),
             actionOnDestroy: (spawnedObject) => Destroy(spawnedObject.gameObject),
-            collectionCheck: true,
             defaultCapacity: _poolDefaultCapacity,
             maxSize: _poolMaxSize
             );

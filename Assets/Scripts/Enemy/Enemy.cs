@@ -7,7 +7,6 @@ public class Enemy : SpawnableObject, IInteractable
     [SerializeField] private EnemyCollisionHandler _collisionHandler;
     [SerializeField] private float _speed = 3f;
 
-    public event Action<Enemy> Destroyed;
     public event Action<Enemy> Despawning;
 
     public EnemyShooter Shooter => _shooter;
@@ -36,8 +35,6 @@ public class Enemy : SpawnableObject, IInteractable
         transform.Translate(_speed * Time.deltaTime * Vector2.left);
     }
 
-    public override void PrepareForSpawn() { }
-
     private void ProcessCollision(IInteractable interactable)
     {
         if (interactable is DespawnZone)
@@ -52,7 +49,6 @@ public class Enemy : SpawnableObject, IInteractable
             if (projectile.Type == ProjectileType.Bird)
             {
                 Despawning?.Invoke(this);
-                Destroyed?.Invoke(this);
             }
         }
     }

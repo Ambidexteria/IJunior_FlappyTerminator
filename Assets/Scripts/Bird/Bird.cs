@@ -11,8 +11,11 @@ public class Bird : MonoBehaviour
 
     private void Awake()
     {
-        if (_birdCollisionHandler == null || _birdMover == null)
-            throw new Exception();
+        if (_birdCollisionHandler == null)
+            throw new NullReferenceException();
+
+        if (_birdMover == null)
+            throw new NullReferenceException();
     }
 
     private void OnEnable()

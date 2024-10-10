@@ -39,15 +39,10 @@ public class EnemySpawner : GenericSpawner<Enemy>
         }
     }
 
-    public Vector3 GetRandomSpawnPosition()
-    {
-        return _spawnZone.GetRandomSpawnPosition();
-    }
-
     public override Enemy Spawn()
     {
         Enemy enemy = GetNextObject();
-        enemy.transform.position = GetRandomSpawnPosition();
+        enemy.transform.position = _spawnZone.GetRandomSpawnPosition();
         enemy.Despawning += Despawn;
         enemy.Shooter.SetProjectileSpawner(_projectileSpawner);
 
@@ -59,6 +54,7 @@ public class EnemySpawner : GenericSpawner<Enemy>
     public override void Despawn(Enemy enemy)
     {
         _enemiesInScene.Remove(enemy);
+        enemy.Despawning -= Despawn;
         ReturnToPool(enemy);
     }
 }

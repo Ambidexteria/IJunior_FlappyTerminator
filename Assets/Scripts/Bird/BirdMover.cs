@@ -17,11 +17,8 @@ public class BirdMover : MonoBehaviour
     private void Awake()
     {
         if (_input == null)
-            throw new Exception();
-    }
+            throw new NullReferenceException();
 
-    private void Start()
-    {
         _rigidbody = GetComponent<Rigidbody2D>();
         _targetRotation = Quaternion.Euler(0, 0, _minRotationAngle);
     }
@@ -36,12 +33,12 @@ public class BirdMover : MonoBehaviour
 
     private void OnEnable()
     {
-        _input.SpaceKeyPressed += Jump;
+        _input.Jump += Jump;
     }
 
     private void OnDisable()
     {
-        _input.SpaceKeyPressed -= Jump;
+        _input.Jump -= Jump;
     }
 
     private void Jump()

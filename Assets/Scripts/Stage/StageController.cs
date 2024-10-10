@@ -12,7 +12,8 @@ public class StageController : MonoBehaviour
     [SerializeField] private float _spawnCooldown = 2f;
     [SerializeField] private TextMeshProUGUI _endStageMessage;
 
-    private WaitForSeconds _wait;
+    private WaitForSeconds _waitStartSpawnDelay;
+    private WaitForSeconds _waitSpawnCooldown;
 
     private void OnEnable()
     {
@@ -28,11 +29,23 @@ public class StageController : MonoBehaviour
 
     private void Awake()
     {
-        if (_enemySpawner == null || _stageProgressBar == null || _bird == null || _endStageMessage == null)
+        if (_enemySpawner == null)
+            throw new NullReferenceException();
+
+        if (_stageProgressBar == null)
+            throw new NullReferenceException();
+
+        if (_bird == null)
+            throw new NullReferenceException();
+
+        if (_endStageMessage == null)
             throw new NullReferenceException();
 
         if (_spawnDelay <= 0 || _spawnCooldown <= 0)
             throw new ArgumentOutOfRangeException();
+
+        _waitStartSpawnDelay = new WaitForSeconds(_spawnDelay);
+        _waitSpawnCooldown = new WaitForSeconds(_spawnCooldown);
     }
 
     private void Start()
@@ -47,14 +60,12 @@ public class StageController : MonoBehaviour
 
     private IEnumerator LaunchSpawnCoroutine()
     {
-        yield return new WaitForSeconds(_spawnDelay);
-
-        _wait = new WaitForSeconds(_spawnCooldown);
+        yield return _waitStartSpawnDelay;
 
         while (enabled)
         {
             _enemySpawner.Spawn();
-            yield return _wait;
+            yield return _waitSpawnCooldown;
         }
     }
 

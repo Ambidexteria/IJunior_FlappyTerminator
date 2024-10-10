@@ -3,15 +3,18 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    public event Action SpaceKeyPressed;
-    public event Action EKeyPressed;
+    [SerializeField] private KeyCode _jumpButton;
+    [SerializeField] private KeyCode _shootButton;
+
+    public event Action Jump;
+    public event Action Shoot;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            SpaceKeyPressed?.Invoke();
+        if (Input.GetKeyDown(_jumpButton))
+            Jump?.Invoke();
 
-        if (Input.GetKeyDown(KeyCode.E))
-            EKeyPressed?.Invoke();
+        if (Input.GetKeyDown(_shootButton))
+            Shoot?.Invoke();
     }
 }
