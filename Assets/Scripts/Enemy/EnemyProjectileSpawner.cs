@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -38,19 +37,11 @@ public class EnemyProjectileSpawner : GenericSpawner<Projectile>
 
     public override Projectile Spawn()
     {
-        try
-        {
-            Projectile projectile = GetNextObject();
-            projectile.SetType(_projectileType);
-            projectile.Destroyed += Despawn;
-            _projectiles.Add(projectile);
+        Projectile projectile = GetNextObject();
+        projectile.SetType(_projectileType);
+        projectile.Destroyed += Despawn;
+        _projectiles.Add(projectile);
 
-            return projectile;
-        }
-        catch (Exception ex)
-        {
-            Debug.LogException(ex);
-        }
-        return null;
+        return projectile;
     }
 }

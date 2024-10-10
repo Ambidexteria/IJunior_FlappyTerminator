@@ -12,6 +12,9 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : Spawnabl
 
     private void Awake()
     {
+        if (_prefab == null)
+            throw new NullReferenceException();
+
         InitializePool();
     }
 
@@ -27,10 +30,10 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : Spawnabl
 
     public Type GetNextObject()
     {
-            Type type = _pool.Get();
-            type.gameObject.SetActive(true);
+        Type type = _pool.Get();
+        type.gameObject.SetActive(true);
 
-            return type;
+        return type;
     }
 
     public virtual void PrepareToDeactivate(Type spawnedObject) { }
@@ -56,9 +59,6 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : Spawnabl
 
     private Type Create()
     {
-        if (_prefab == null)
-            throw new NullReferenceException();
-
         Type spawnedObject = Instantiate(_prefab);
 
         return spawnedObject;

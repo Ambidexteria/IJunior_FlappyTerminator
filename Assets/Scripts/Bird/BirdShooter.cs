@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using System;
 
@@ -19,7 +18,6 @@ public class BirdShooter : MonoBehaviour
 
         if (_input == null)
             throw new NullReferenceException();
-        ;
     }
 
     private void OnEnable()

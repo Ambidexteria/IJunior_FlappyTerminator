@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,16 +7,7 @@ public class EnemySpawner : GenericSpawner<Enemy>
     [SerializeField] private SpawnZone _spawnZone;
     [SerializeField] private List<Enemy> _enemiesInScene = new();
 
-    private void Start()
-    {
-        if (_projectileSpawner == null)
-            throw new NullReferenceException();
-
-        if (_spawnZone == null)
-            throw new NullReferenceException();
-    }
-
-    private void OnEnable()
+     private void OnEnable()
     {
         if (_enemiesInScene.Count > 0)
         {

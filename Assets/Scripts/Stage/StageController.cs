@@ -11,6 +11,8 @@ public class StageController : MonoBehaviour
     [SerializeField] private float _spawnDelay = 3f;
     [SerializeField] private float _spawnCooldown = 2f;
     [SerializeField] private TextMeshProUGUI _endStageMessage;
+    [SerializeField] private string _gameOverText = "Game Over";
+    [SerializeField] private string _winText = "You win!";
 
     private WaitForSeconds _waitStartSpawnDelay;
     private WaitForSeconds _waitSpawnCooldown;
@@ -41,7 +43,10 @@ public class StageController : MonoBehaviour
         if (_endStageMessage == null)
             throw new NullReferenceException();
 
-        if (_spawnDelay <= 0 || _spawnCooldown <= 0)
+        if (_spawnDelay <= 0)
+            throw new ArgumentOutOfRangeException();
+
+        if (_spawnCooldown <= 0)
             throw new ArgumentOutOfRangeException();
 
         _waitStartSpawnDelay = new WaitForSeconds(_spawnDelay);
@@ -72,14 +77,14 @@ public class StageController : MonoBehaviour
     private void ShowGameOverMessage()
     {
         Time.timeScale = 0f;
-        _endStageMessage.text = "Game Over";
+        _endStageMessage.text = _gameOverText;
         _endStageMessage.gameObject.SetActive(true);
     }
 
     private void ShowWinMessage()
     {
         Time.timeScale = 0f;
-        _endStageMessage.text = "You win!";
+        _endStageMessage.text = _winText;
         _endStageMessage.gameObject.SetActive(true);
     }
 }

@@ -7,7 +7,6 @@ public class BirdProjectileSpawner : GenericSpawner<Projectile>
     [SerializeField] private ProjectileType _projectileType;
     [SerializeField] private List<Projectile> _projectiles = new List<Projectile>();
 
-
     private void OnEnable()
     {
         if(_projectiles.Count > 0)
