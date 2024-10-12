@@ -59,8 +59,6 @@ public abstract class GenericSpawner<Type> : MonoBehaviour where Type : Spawnabl
 
     private Type Create()
     {
-        Type spawnedObject = Instantiate(_prefab);
-
-        return spawnedObject;
+        return Instantiate(_prefab);
     }
 }

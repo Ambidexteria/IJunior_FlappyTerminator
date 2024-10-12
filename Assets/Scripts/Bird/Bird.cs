@@ -7,7 +7,7 @@ public class Bird : MonoBehaviour
     [SerializeField] private BirdMover _birdMover;
 
     public event Action Dead;
-    public event Action Win;
+    public event Action Winning;
 
     private void Awake()
     {
@@ -44,6 +44,6 @@ public class Bird : MonoBehaviour
             Dead?.Invoke();
 
         if(interactable is StageFinish)
-            Win?.Invoke();
+            Winning?.Invoke();
     }
 }

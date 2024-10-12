@@ -22,12 +22,12 @@ public class BirdShooter : MonoBehaviour
 
     private void OnEnable()
     {
-        _input.Shoot += Shoot;
+        _input.ShotPerformed += Shoot;
     }
 
     private void OnDisable()
     {
-        _input.Shoot -= Shoot;
+        _input.ShotPerformed -= Shoot;
     }
 
     private void Shoot()

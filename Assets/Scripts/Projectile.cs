@@ -26,7 +26,13 @@ public class Projectile : SpawnableObject, IInteractable
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out DespawnZone zone))
-            Destroyed?.Invoke(this);
+        { 
+            Destroyed?.Invoke(this); 
+        }
+        else if (collision.TryGetComponent(out Enemy _) && _projectileType == ProjectileType.Bird)
+        { 
+            Destroyed?.Invoke(this); 
+        }
     }
 
     public void SetType(ProjectileType type)
